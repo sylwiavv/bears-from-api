@@ -1,19 +1,32 @@
 const API_URL = 'https://api.punkapi.com/v2/beers';
 const container = document.querySelector('.container');
+const paginationPrev = document.querySelector('.prev');
+const paginationNext = document.querySelector('.next');
+const page = document.querySelector('.page');
 
-// <div className="beer">
-//     <div className="beer--content">
-//         <h1 className="beer--title"></h1>
-//         <p className="beer--tagline"></p>
-//         <p className="beer--description"></p>
-//     </div>
-//     <img className="beer--image" src="">
-// </div>
+const API_URL_PAGINATION = 'https://api.punkapi.com/v2/beers?page=1&per_page=10';
+let pageNumber = 1;
 
-const render = (data) => {
-    if (!data.length) return;
+const nextPage = () => {
+    pageNumber++;
+    getBeers();
+}
+
+const prevPage = () => {
+    pageNumber--;
+    getBeers();
+}
+
+paginationNext.addEventListener('click', nextPage);
+paginationPrev.addEventListener('click', prevPage);
+
+
+const error = (err) => console.log(err);
+
+const render = (beers) => {
+    if (!beers.length) return;
     const fragment = document.createDocumentFragment();
-    data.forEach(({ name, tagline, description, image_url: imageURL }) => {
+    beers.forEach(({ name, tagline, description, image_url: imageURL }) => {
         const div = document.createElement('div');
         div.classList.add('beer');
         div.innerHTML = `
@@ -26,20 +39,26 @@ const render = (data) => {
         `;
         fragment.appendChild(div);
     });
+    page.innerHTML = pageNumber;
     container.appendChild(fragment);
+
+    if (pageNumber === 1) {
+        paginationPrev.setAttribute("disabled", "");
+    } else if (pageNumber === 6) {
+        paginationNext.setAttribute("disabled", "");
+    } else {
+        paginationPrev.removeAttribute("disabled");
+        paginationNext.removeAttribute("disabled");
+    }
 }
 
-const success = (data) => {
-    const bears = JSON.parse(data.target.responseText);
-    render(bears);
+async function getBeers() {
+    fetch(API_URL_PAGINATION)
+    .catch(error)
+    const beerPromise = await fetch('https://api.punkapi.com/v2/beers?page=' + `${pageNumber}` + '&per_page=5');
+    const beers = await beerPromise.json();
+    console.log(beers);
+    render(beers);
 }
 
-const error = (err) => {
-  console.log(err);
-}
-
-const req = new XMLHttpRequest();
-req.onload = success;
-req.onerror = error;
-req.open('GET', API_URL);
-req.send();
+getBeers();
