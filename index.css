@@ -64,7 +64,14 @@ button {
   border-radius: 4px;
 }
 
-button:focus,
 button:hover {
-  background-color: #0d3253;
+  background-color: #154167;
+  cursor: pointer;
+}
+
+.filter-form-abv {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
