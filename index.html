@@ -1,44 +1,43 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Beers Menu</title>
-  <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Beers Menu</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <form id="filterABV" class="filter-form-abv">
-  <label for="abvAll">
-    <input type="radio" name="filter-abv" class="filter all" id="abvAll" value="all"
-           checked />
-    <span class="filter all">All</span>
-  </label>
+    <label for="abvAll">
+        <input type="radio" name="filter-abv" class="filter all" id="abvAll" value="all"
+               checked/>
+        <span class="filter all">All</span>
+    </label>
 
-  <label for="abvWeak">
-    <input type="radio" name="filter-abv" class="filter weak" id="abvWeak" value="weak" />
-    <span class="filter weak">Weak</span>
-  </label>
+    <label for="abvWeak">
+        <input type="radio" name="filter-abv" class="filter weak" id="abvWeak" value="weak"/>
+        <span class="filter weak">Weak</span>
+    </label>
 
-  <label for="abvMedium">
-    <input type="radio" name="filter-abv" class="filter medium" id="abvMedium" value="medium" />
-    <span class="filter medium">Medium</span>
-  </label>
+    <label for="abvMedium">
+        <input type="radio" name="filter-abv" class="filter medium" id="abvMedium" value="medium"/>
+        <span class="filter medium">Medium</span>
+    </label>
 
-  <label for="abvStrong">
-    <input type="radio" name="filter-abv" class="filter strong" id="abvStrong" value="strong" />
-    <span class="filter strong">Strong</span>
-  </label>
+    <label for="abvStrong">
+        <input type="radio" name="filter-abv" class="filter strong" id="abvStrong" value="strong"/>
+        <span class="filter strong">Strong</span>
+    </label>
 </form>
 
 </form>
 <div class="container"></div>
-<div class="test"></div>
 <div class="pagination">
-  <button class="prev" disabled>Prev</button>
-  page: <span class="page">1</span>
-  <button class="next">Next</button>
+    <button class="prev" disabled>Prev</button>
+    page: <span class="page">1</span>
+    <button class="next">Next</button>
 </div>
 <script defer async src="index.js"></script>
 </body>
