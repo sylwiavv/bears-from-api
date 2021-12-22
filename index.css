@@ -72,3 +72,8 @@ button:hover {
   align-items: center;
   flex-direction: row;
 }
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
