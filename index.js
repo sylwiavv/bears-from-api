@@ -1,28 +1,12 @@
-const urlBase = "https://api.punkapi.com/v2/beers?page=";
-
+let url = "https://api.punkapi.com/v2/beers?per_page=10";
+let currentUrl;
 const container = document.querySelector('.container');
 const paginationPrev = document.querySelector('.prev');
 const paginationNext = document.querySelector('.next');
-let tekst = document.querySelector('.test');
 const page = document.querySelector('.page');
 const filterABV = document.getElementById("filterABV");
-let optionsABV = "";
-let perPage = '&per_page=5';
+// let perPage = '&per_page=5';
 let pageNumber = 1;
-
-const nextPage = () => {
-    pageNumber++;
-    console.log(pageNumber);
-    getBeers();
-}
-
-const prevPage = () => {
-    pageNumber--;
-    getBeers();
-}
-
-paginationNext.addEventListener('click', nextPage);
-paginationPrev.addEventListener('click', prevPage);
 
 const error = (err) => console.log(err);
 
@@ -30,12 +14,7 @@ const render = (beers) => {
     console.log(beers);
     if (!beers.length) return;
     const fragment = document.createDocumentFragment();
-    beers.forEach(({ name, tagline, description, abv, image_url: imageURL }) => {
-        // const h1 = document.createElement('h1');
-        // test.append(h1);
-        // h1.innerHTML = `${name}`;
-        // console.log((h1));
-        // test.replaceChild(h1);
+    beers.forEach(({name, tagline, description, abv, image_url: imageURL}) => {
         const div = document.createElement('div');
         div.classList.add('beer');
         div.innerHTML = `
@@ -67,33 +46,57 @@ const render = (beers) => {
 }
 
 filterABV.addEventListener("change", e => {
+    const input = document.querySelector('.filter');
+    console.log(input.value);
     const value = e.target.value;
-    console.log(value);
-
     switch (value) {
         case "all":
-            optionsABV = "";
+            getBeers(urlOnLoad);
             break
         case "weak":
-            optionsABV = "&abv_lt=4.6";
+            currentUrl = new URL(url);
+            currentUrl.searchParams.append('abv_lt', '4.6');
+            // console.log(currentUrl.href + ' weak');
             break
         case "medium":
-            optionsABV = "&abv_gt=4.5&abv_lt=7.6";
+            currentUrl = new URL(url);
+            currentUrl.searchParams.append('abv_gt', '4.5');
+            currentUrl.searchParams.append('abv_lt', '7.6');
+            nextPage();
+            // console.log(currentUrl.href + ' medium');
             break
         case "strong":
-            optionsABV = "&abv_gt=7.5";
+            currentUrl = new URL(url);
+            currentUrl.searchParams.append('abv_gt', '7.5');
+            // console.log(currentUrl.href + ' strong');
             break
     }
+    console.log(currentUrl);
     pageNumber = 1;
-    getBeers();
-})
+    getBeers(currentUrl);
+});
 
-async function getBeers() {
-    const url = urlBase + pageNumber + optionsABV + perPage;
-    const beerPromise = await fetch(url);
+const nextPage = () => {
+    pageNumber++;
+    urlOnLoad.searchParams.set('page', pageNumber);
+    getBeers(currentUrl);
+    console.log(currentUrl);
+}
+const prevPage = () => {
+    pageNumber--;
+    urlOnLoad.searchParams.set('page', pageNumber);
+    getBeers(urlOnLoad);
+}
+
+paginationNext.addEventListener('click', nextPage);
+paginationPrev.addEventListener('click', prevPage);
+
+async function getBeers(currentUrl) {
+    console.log(currentUrl);
+    const beerPromise = await fetch(currentUrl);
     const beers = await beerPromise.json();
-    console.log(url);
     render(beers);
 }
 
-getBeers();
+let urlOnLoad = new URL(url);
+getBeers(urlOnLoad);
