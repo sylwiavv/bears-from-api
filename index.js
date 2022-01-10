@@ -5,9 +5,8 @@ const paginationPrev = document.querySelector('.prev');
 const paginationNext = document.querySelector('.next');
 const page = document.querySelector('.page--number');
 const filterABV = document.getElementById("filterABV");
-// let perPage = '&per_page=5';
 let pageNumber = 1;
-const beerDescription = document.querySelectorAll('beer');
+container.classList.add('on-load');
 
 // const error = (err) => console.log(err);
 
@@ -71,18 +70,27 @@ filterABV.addEventListener("change", e => {
     getBeers(currentUrl);
 });
 
+const scrollTop = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
 const nextPage = () => {
     pageNumber++;
     currentUrl.searchParams.set('page', pageNumber);
     getBeers(currentUrl);
+    scrollTop();
 }
+
 const prevPage = () => {
     pageNumber--;
     currentUrl.searchParams.set('page', pageNumber);
     getBeers(currentUrl);
+    scrollTop();
 }
-
-container.classList.add('on-load');
 
 setTimeout(function(){
     container.classList.remove('on-load');
