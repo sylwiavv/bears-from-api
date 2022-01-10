@@ -6,10 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Beers Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-<form id="filterABV" class="filter-form-abv">
+<h1 class="title">Choose beers according to abv</h1>
+<form id="filterABV" class="filter-with-abv">
     <label for="abvAll">
         <input type="radio" name="filter-abv" class="filter all" id="abvAll" value="all"
                checked/>
@@ -31,12 +35,14 @@
         <span class="filter strong">Strong</span>
     </label>
 </form>
-
-</form>
-<div class="container"></div>
+<div class="container">
+    <div class="loading">
+        <p>Loading</p>
+    </div>
+</div>
 <div class="pagination">
     <button class="prev" disabled>Prev</button>
-    page: <span class="page">1</span>
+    <div class="page">page: <span class="page--number">1</span></div>
     <button class="next">Next</button>
 </div>
 <script defer async src="index.js"></script>
