@@ -263,6 +263,16 @@ input[type="radio"]:checked + span {
     margin-left: 16px;
   }
 
+  .title {
+    max-width: 295px;
+    margin: 32px 16px;
+  }
+
+  .filter-with-abv {
+    max-width: 295px;
+    width: 100%;
+  }
+
   .beer {
     height: 200px;
     width: 200px;
