@@ -4,12 +4,12 @@ body {
   align-items: center;
   flex-direction: column;
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
   background-color: #fff;
   color: #0e2436;
-  box-sizing: border-box;
+  margin: 0 auto;
   max-width: 900px;
   width: 100%;
-  margin: 0 auto;
 }
 
 .title {
@@ -96,7 +96,7 @@ body {
 .beer:nth-child(6) > .beer--content { background-color: #E79B25; }
 .beer:nth-child(7) > .beer--content { background-color: #1d6437; }
 .beer:nth-child(8) > .beer--content { background-color: #1E455E; }
-.beer:nth-child(9) > .beer--content { background-color: #0a9daf; }
+.beer:nth-child(9) > .beer--content { background-color: #086672; }
 /* Beer content background colors End */
 
 /* Pagination */
