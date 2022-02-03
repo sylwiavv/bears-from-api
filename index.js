@@ -8,8 +8,6 @@ const filterABV = document.getElementById("filterABV");
 let pageNumber = 1;
 container.classList.add('on-load');
 
-// const error = (err) => console.log(err);
-
 const render = (beers) => {
     if (!beers.length) return;
     const fragment = document.createDocumentFragment();
@@ -43,7 +41,6 @@ const render = (beers) => {
         paginationPrev.classList.remove('disabled');
         paginationNext.classList.remove('disabled');
     }
-    console.log(pageNumber);
 }
 
 filterABV.addEventListener("change", e => {
