@@ -101,6 +101,7 @@ async function getBeers(currentUrl) {
         const beers = await beerPromise.json();
         container.classList.add('animate-pop');
         render(beers);
+        return beers;
     } else {
         return `HTTP error: ${beerPromise.status}`;
     }
