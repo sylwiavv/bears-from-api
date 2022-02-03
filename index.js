@@ -97,9 +97,13 @@ setTimeout(function(){
 
 async function getBeers(currentUrl) {
     const beerPromise = await fetch(currentUrl);
-    const beers = await beerPromise.json();
-    render(beers);
-    container.classList.add('animate-pop');
+    if (beerPromise.ok) {
+        const beers = await beerPromise.json();
+        container.classList.add('animate-pop');
+        render(beers);
+    } else {
+        return `HTTP error: ${beerPromise.status}`;
+    }
 }
 
 paginationNext.addEventListener('click', nextPage);
